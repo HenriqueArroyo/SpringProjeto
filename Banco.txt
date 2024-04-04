@@ -1,0 +1,38 @@
+Administrador
+Id
+Nome
+Cpf
+Email
+Senha
+
+---------------------------------
+Professor
+Id
+Nome
+Cpf
+Email
+Senha
+Disciplina(Fk)
+
+----------------------------------
+Alunos
+Id
+Nome
+Data de Nascimento
+Cpf
+Email
+Senha
+Disciplina 1(Fk)
+Disciplina 2(Fk)
+Disciplina 3(Fk)
+
+------------------------------------
+Disciplina
+id
+Matéria
+Horário
+
+
+
+
+
