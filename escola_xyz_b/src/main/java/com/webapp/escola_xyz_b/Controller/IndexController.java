@@ -50,8 +50,16 @@ public class IndexController {
         ModelAndView mv = new ModelAndView("cadastro/cadastro-aluno");
         return mv;
     }
-   
-   
+    @GetMapping("/contato")
+    public ModelAndView acessoContato() {
+        ModelAndView mv = new ModelAndView("contato/contato");
+        return mv;
+    }
+    @GetMapping("/sobre")
+    public ModelAndView acessoSobre() {
+        ModelAndView mv = new ModelAndView("sobre/sobre");
+        return mv;
+    }
     
     
     

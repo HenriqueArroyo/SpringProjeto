@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Aluno {
+public class Aluno implements Serializable {
   //atributos
   @Id
   private String cpf;
