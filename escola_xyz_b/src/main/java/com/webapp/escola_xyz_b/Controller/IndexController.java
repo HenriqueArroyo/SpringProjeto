@@ -35,21 +35,13 @@ public class IndexController {
         ModelAndView mv = new ModelAndView("login/login-professor");
         return mv;
     }
-    @GetMapping("/cadastro-professor")
-    public ModelAndView acessoCadastroProfessor() {
-        ModelAndView mv = new ModelAndView("cadastro/cadastro-professor");
-        return mv;
-    }
+
     @GetMapping("/login-aluno")
     public ModelAndView acessoLoginAluno() {
         ModelAndView mv = new ModelAndView("login/login-aluno");
         return mv;
     }
-    @GetMapping("/cadastro-aluno")
-    public ModelAndView acessoCadastroAluno() {
-        ModelAndView mv = new ModelAndView("cadastro/cadastro-aluno");
-        return mv;
-    }
+
     @GetMapping("/contato")
     public ModelAndView acessoContato() {
         ModelAndView mv = new ModelAndView("contato/contato");
@@ -61,7 +53,16 @@ public class IndexController {
         return mv;
     }
     
+    @GetMapping("/interna-alunos")
+    public ModelAndView acessoAlunos() {
+        ModelAndView mv = new ModelAndView("interna/interna-alunos");
+        return mv;
+    }
     
-    
-    
+    @GetMapping("/interna-create-alunos")
+    public ModelAndView acessoCriarAlunos() {
+        ModelAndView mv = new ModelAndView("interna/interna-create-alunos");
+        return mv;
+    }
+
 }

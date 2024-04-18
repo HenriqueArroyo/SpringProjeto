@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org/">
+<html lang="pt-br" xmlns:th="http://thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interna-adm</title>
+    <title>Home</title>
+    <div th:include="~{fragmentos/head}"><!-- menu de estilização --></div>
 </head>
+
+
 <body>
+   <div th:insert="~{fragmentos/headerAdm :: header}"><!-- barra de menu --></div>
+    <div class="container">
+
     <h1>Página Interna ADM</h1>
-    <form action="logout-adm" method="post">
-        <button type="submit">Sair</button>
-    </form>
+  
     
 </body>
 </html>

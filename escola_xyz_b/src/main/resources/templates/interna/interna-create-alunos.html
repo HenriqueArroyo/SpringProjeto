@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Aluno</title>
+</head>
+<body>
+    
+    <h1>Formulário de Aluno</h1>
+    <form action="#" th:action="@{Controller/AlunoController.java}" th:object="${aluno}" method="post">
+        <input type="hidden" th:field="*{cpf}"/>
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}"/>
+        </div>
+        <!-- Adicione mais campos conforme necessário -->
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>
