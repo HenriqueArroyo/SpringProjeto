@@ -1,77 +1,66 @@
 package com.webapp.escola_xyz_b.Controller;
 
-import com.webapp.escola_xyz_b.Model.Aluno;
-import com.webapp.escola_xyz_b.Service.AlunoService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-import java.util.Optional;
+import com.webapp.escola_xyz_b.Model.Aluno;
+import com.webapp.escola_xyz_b.Repository.AlunoRepository;
 
-@RestController
-@RequestMapping("/alunos")
+@Controller
 public class AlunoController {
 
+    boolean acessoAluno = false;
 
     @Autowired
-    private AlunoService alunoService;
+    AlunoRepository alr;
 
-    @GetMapping("/listar")
-    public String listarAlunos(Model model) {
-        List<Aluno> alunos = alunoService.listarAlunos();
+
+    @GetMapping("/interna-aluno")
+    public String acessoPageInternaAluno(@RequestParam String registro, Model model) {
+        String vaiPara = "";
+        if (acessoAluno) {
+            vaiPara = "interna/interna-aluno";
+        } else {
+            vaiPara = "login/login-aluno";
+        }
+        Aluno aluno = alr.findByRegistro(registro);
+        model.addAttribute("aluno", aluno);
+        return vaiPara;
+    }
+
+    @PostMapping("acesso-aluno")
+    public String acessoAluno(@RequestParam String registro,
+            @RequestParam String senha) {
+        try {
+            boolean verificaRegistro = alr.existsByRegistro(registro);
+            boolean verificaSenha = alr.findByRegistro(registro).getSenha().equals(senha);
+            String url = "";
+            if (verificaRegistro && verificaSenha) {
+                acessoAluno = true;
+                url = "redirect:interna-aluno?registro=" + registro;
+            } else {
+                url = "redirect:/login-aluno";
+                System.out.println("Erro de login");
+            }
+            return url;
+        } catch (Exception e) {
+            System.out.println("Erro de login");
+            return "redirect:/login-aluno";
+        }
+    }
+
+    @PostMapping("/pesquisa-aluno")
+    public String pesquisaAlunoPorNome(@RequestParam String nome, Model model) {
+        // Realiza a pesquisa de alunos por nome
+        Iterable<Aluno> alunos = alr.findByNomeContaining(nome);
         model.addAttribute("alunos", alunos);
-        return "/interna/interna-alunos";
+        return "interna/interna-adm";
     }
 
-    @GetMapping("/adicionar")
-    public String exibirFormularioAdicao(Model model) {
-        model.addAttribute("aluno", new Aluno());
-        return "interna/interna-create-alunos";
-    }
-
-    @PostMapping("/salvar")
-    public String salvarAluno(@ModelAttribute("aluno") Aluno aluno) {
-        alunoService.criarAluno(aluno);
-        return "redirect:/alunos/listar";
-    }
-
-
-
-
-
-
-
-    // @Autowired
-    // private AlunoService alunoService;
-
-    // @GetMapping
-    // public List<Aluno> listarAlunos() {
-    //     return alunoService.listarAlunos();
-    // }
-
-    // // @GetMapping("/{cpf}")
-    // // public Aluno encontrarAlunoPorCpf(@PathVariable String cpf) {
-    // //     Optional<Aluno> aluno = alunoService.encontrarAlunoPorCpf(cpf);
-    // //     return aluno.orElse(null);
-    // // }
-
-    // @PostMapping
-    // public Aluno criarAluno(@RequestBody Aluno aluno) {
-    //     return alunoService.criarAluno(aluno);
-    // }
-
-    // // @PutMapping("/{cpf}")
-    // public Aluno atualizarAluno(@PathVariable String cpf, @RequestBody Aluno aluno) {
-    //     if (!cpf.equals(aluno.getCpf())) {
-    //         // Tratar erro, CPF do aluno não corresponde ao CPF informado na URL
-    //         return null;
-    //     }
-    //     return alunoService.atualizarAluno(aluno);
-    // }
-
-    // @DeleteMapping("/{cpf}")
-    // public void excluirAluno(@PathVariable String cpf) {
-    //     alunoService.excluirAluno(cpf);
-    // }
 }
