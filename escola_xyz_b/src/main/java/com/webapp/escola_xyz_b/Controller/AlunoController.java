@@ -21,7 +21,7 @@ public class AlunoController {
     public String listarAlunos(Model model) {
         List<Aluno> alunos = alunoService.listarAlunos();
         model.addAttribute("alunos", alunos);
-        return "interna/interna-alunos";
+        return "/interna/interna-alunos";
     }
 
     @GetMapping("/adicionar")

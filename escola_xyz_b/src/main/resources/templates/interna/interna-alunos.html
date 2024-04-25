@@ -3,28 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Alunos</title>
-    <div th:include="~{fragmentos/head}"><!-- menu de estilização --></div>
 </head>
 <body>
-    <div th:insert="~{fragmentos/headerAdm :: header}"><!-- barra de menu --></div>
-    <div class="container">
     <h1>Lista de Alunos</h1>
-    <table>
+    <table border="1">
         <thead>
             <tr>
                 <th>CPF</th>
                 <th>Nome</th>
-                <!-- Adicione mais colunas conforme necessário -->
+                <th>Email</th>
+                <th>Data de Nascimento</th>
+                <th>Disciplina 1</th>
+                <th>Disciplina 2</th>
+                <th>Disciplina 3</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="aluno : ${alunos}">
                 <td th:text="${aluno.cpf}"></td>
                 <td th:text="${aluno.nome}"></td>
-                <!-- Adicione mais colunas conforme necessário -->
+                <td th:text="${aluno.email}"></td>
+                <td th:text="${aluno.dataNascimento}"></td>
+                <td th:text="${aluno.disciplina1}"></td>
+                <td th:text="${aluno.disciplina2}"></td>
+                <td th:text="${aluno.disciplina3}"></td>
             </tr>
         </tbody>
     </table>
-    <a href="/interna-create-alunos">Clicar Aqui</a>
 </body>
 </html>
